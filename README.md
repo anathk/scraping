@@ -1,5 +1,5 @@
 # scraping
 
 * apcrawler
-  * framework: scrapy
+  * framework or library: scrapy
   * description: download apk file from apkpure.com

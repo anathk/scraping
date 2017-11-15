@@ -18,7 +18,7 @@ from apkcrawler.items import ApkcrawlerItem
 class ApkpureSpider(scrapy.Spider):
     name = 'apkpure'
     allowed_domains = ['apkpure.com']
-    start_urls = ['https://apkpure.com/app']
+    start_urls = ['https://apkpure.com/game']
     
     #csvwriter = csv.writer(open('apk_items.csv', 'w+'))
     
@@ -31,10 +31,13 @@ class ApkpureSpider(scrapy.Spider):
         #Rule(LinkExtractor(allow=('.*', )), callback='parse', follow=True),)
 
     def parse(self, response):
-        #/html/body/div[2]/div[2]/div/div[2]/div[2]/ul/li[6]/a
-        #/html/body/div[2]/div[2]/div/div[2]/div[2]/ul/li[1]/a
+        #/html/body/div[2]/div[2]/div/div[2]/div[2]/ul/li[6]/a   apps category
+        #/html/body/div[2]/div[2]/div/div[2]/div[2]/ul/li[1]/a   apps category
         
-        categories = response.xpath('/html/body/div[2]/div[2]/div/div[2]/div[2]/ul/li/a').xpath('@href').extract()        
+        #/html/body/div[2]/div[2]/div/div[2]/div[1]/ul/li[1]/a   games category
+        #/html/body/div[2]/div[2]/div/div[2]/div[1]/ul/li[2]/a   games category
+        
+        categories = response.xpath('/html/body/div[2]/div[2]/div/div[2]/div[1]/ul/li/a').xpath('@href').extract()        
         if categories is not None:
             self.logger.info('-------------------------------------------------------------')
             self.logger.info('Parsing ' + response.url)
